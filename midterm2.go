@@ -119,7 +119,24 @@ last, etc. You can assume that m is less than the length of the linked list.
 *******************************************************************************************/
 
 func MthFromEnd(ll *ListNode, m int) int {
-	return 0
+	dummyHead := &ListNode{-1, ll}
+	first := ll
+	second := dummyHead
+
+	for i := 0; i < m+1; i++ {
+		first = first.next
+	}
+
+	for {
+		if first == nil {
+			break
+		}
+		first = first.next
+		second = second.next
+	}
+
+	// find the place to delete
+	return second.next.value
 }
 
 /*******************************************************************************************
