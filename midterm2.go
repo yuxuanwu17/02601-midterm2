@@ -35,6 +35,8 @@
 
 package main
 
+import "fmt"
+
 /*******************************************************************************************
 Problem 1. Write the function "IsBSTOrdered()": If the values in the binary
 tree rooted at `root` satisfy the binary search tree ordering, return true. If
@@ -264,7 +266,53 @@ the input matrix.
 *******************************************************************************************/
 
 func RemoveRowsColumns(matrix [][]int, x int) [][]int {
-	return nil
+	// 1. find the index for each row and column containing the value x
+	oldRowLen := len(matrix)
+	oldColLen := len(matrix[0])
+
+	// 2. use a map to store the index
+	rowMap := map[int]bool{}
+	colMap := map[int]bool{}
+
+	for i := 0; i < oldRowLen; i++ {
+		for j := 0; j < oldColLen; j++ {
+			if x == matrix[i][j] {
+				rowMap[i] = true
+				colMap[j] = true
+			}
+		}
+	}
+
+	fmt.Println("rowMap is: ", rowMap)
+	fmt.Println("colMap is: ", colMap)
+
+	delRowNum := len(rowMap)
+	delColNum := len(colMap)
+
+	//3. create a new matrix with size [oldRowLen-delRowNum][oldColLen-delColNum]
+	newRowLen := oldRowLen - delRowNum
+	newColLen := oldColLen - delColNum
+
+	newMatrix := make([][]int, newRowLen)
+	for i := 0; i < newRowLen; i++ {
+		newMatrix[i] = make([]int, newColLen)
+	}
+
+	// 4. iterate through the old matrix and fill in the new matrix
+	newI := 0
+	for i := 0; i < oldRowLen; i++ {
+		if !rowMap[i] {
+			newJ := 0
+			for j := 0; j < oldColLen; j++ {
+				if !colMap[j] {
+					newMatrix[newI][newJ] = matrix[i][j]
+					newJ++
+				}
+			}
+			newI++
+		}
+	}
+	return newMatrix
 }
 
 // END OF MIDTERM

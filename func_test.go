@@ -181,3 +181,24 @@ func TestStack_Min(t *testing.T) {
 	S2.Pop()
 	fmt.Println(S2.Min()) // prints -2
 }
+
+func TestRemoveRowsColumns(t *testing.T) {
+	matrix := [][]int{
+		{0, 1, 2, 3},
+		{4, 5, 6, 7},
+		{8, 5, 10, 11},
+	}
+
+	newMatrix := RemoveRowsColumns(matrix, 5)
+	fmt.Println(newMatrix)
+	matrix2 := [][]int{
+		{0, 1, 2, 3},
+		{4, 5, 5, 7},
+		{4, 2, 6, 7},
+		{4, 2, 5, 7},
+		{8, 1, 10, 11},
+	}
+	newMatrix2 := RemoveRowsColumns(matrix2, 5)
+	fmt.Println(newMatrix2)
+
+}
