@@ -50,8 +50,20 @@ type TreeNode struct {
 }
 
 func IsBSTOrdered(root *TreeNode) bool {
+	return IsValidBST(root, nil, nil)
+}
 
-	return false
+func IsValidBST(root *TreeNode, min *TreeNode, max *TreeNode) bool {
+	if root == nil {
+		return true
+	}
+	if min != nil && root.value <= min.value {
+		return false
+	}
+	if max != nil && root.value >= max.value {
+		return false
+	}
+	return IsValidBST(root.left, min, root) && IsValidBST(root.right, root, max)
 }
 
 /*******************************************************************************************
