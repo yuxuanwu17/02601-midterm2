@@ -54,6 +54,34 @@ func TestIsBSTOrdered(t *testing.T) {
 	fmt.Println(IsBSTOrdered(&node5))
 }
 
+func TestLowestCommonAncestor(t *testing.T) {
+	root := TreeNode{
+		value: 3,
+		left: &TreeNode{
+			value: 5,
+			left:  &TreeNode{nil, nil, 6},
+			right: &TreeNode{&TreeNode{nil, nil, 7}, &TreeNode{nil, nil, 4}, 2},
+		},
+		right: &TreeNode{
+			value: 1,
+			left:  &TreeNode{nil, nil, 0},
+			right: &TreeNode{nil, nil, 8},
+		},
+	}
+
+	// preorder traverse
+	fmt.Println("The preorder traversal of the given graph")
+	preOrderTraverse(&root)
+	fmt.Println()
+	fmt.Println("5,1 => 3")
+	fmt.Println(LowestCommonAncestor(&root, 5, 1))
+	fmt.Println("5,4 => 5")
+	fmt.Println(LowestCommonAncestor(&root, 5, 4))
+	fmt.Println("2,0=>3")
+	fmt.Println(LowestCommonAncestor(&root, 2, 0))
+
+}
+
 func TestMergeSortedLists(t *testing.T) {
 	l1 := ListNode{
 		value: 1,

@@ -30,8 +30,8 @@
 // finished before submitting.
 
 // Replace the following with your information:
-// Name: YOUR NAME
-// Andrew ID: YOUR ANDREWID
+// Name: Yuxuan Wu
+// Andrew ID: yuxuanwu
 
 package main
 
@@ -78,7 +78,31 @@ Hint: Think about the BST tree ordering.
 *******************************************************************************************/
 
 func LowestCommonAncestor(root *TreeNode, x, y int) int {
-	return 0
+	// base case
+	if root == nil {
+		return -1
+	}
+	if root.value == x || root.value == y {
+		return root.value
+	}
+
+	left := LowestCommonAncestor(root.left, x, y)
+	right := LowestCommonAncestor(root.right, x, y)
+
+	// condition 1
+	if left != -1 && right != -1 {
+		return root.value
+	}
+
+	if left == -1 && right == -1 {
+		return -1
+	}
+
+	if left == -1 {
+		return right
+	} else {
+		return left
+	}
 }
 
 /*******************************************************************************************
