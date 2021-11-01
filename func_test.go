@@ -159,3 +159,25 @@ func TestMthFromEnd(t *testing.T) {
 	fmt.Println(MthFromEnd(&ll, 3))
 	fmt.Println(MthFromEnd(&ll, 4))
 }
+
+func TestStack_Min(t *testing.T) {
+	var S = Stack{}
+	S.Push(10)
+	S.Push(3)
+	S.Push(12)
+	S.Push(2)
+	fmt.Println(S.Min()) // prints 2
+	S.Pop()
+	fmt.Println(S.Min()) // prints 3
+	S.Pop()
+	fmt.Println(S.Min()) // prints 3
+
+	fmt.Println("==============================")
+	var S2 = Stack{}
+	S2.Push(-2)
+	S2.Push(0)
+	S2.Push(-3)
+	fmt.Println(S2.Min()) // prints -3
+	S2.Pop()
+	fmt.Println(S2.Min()) // prints -2
+}

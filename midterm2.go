@@ -198,7 +198,8 @@ Hint: as one Push()es new items, the min can only go down.
 *******************************************************************************************/
 
 type Stack struct {
-	top *StackItem // pointer to the item on the top of the stack
+	top      *StackItem // pointer to the item on the top of the stack
+	minStack *StackItem // helper stack which
 }
 
 type StackItem struct {
@@ -213,6 +214,18 @@ func (s *Stack) Push(v int) {
 		prev:  s.top,
 		value: v,
 	}
+	// compare with the top of minStack
+	if s.minStack == nil {
+		s.minStack = &StackItem{
+			prev:  s.minStack,
+			value: v,
+		}
+	} else {
+		s.minStack = &StackItem{
+			prev:  s.minStack,
+			value: Compare2Min(s.minStack.value, v),
+		}
+	}
 }
 
 // Pop removes and returns the item at the top of the Stack. It runs in
@@ -223,16 +236,23 @@ func (s *Stack) Pop() int {
 	}
 	v := s.top.value
 	s.top = s.top.prev
+	s.minStack = s.minStack.prev
 	return v
 }
 
 // Min returns the smallest integer on the stack without changing the items on the stack.
 // It runs in time independent of the number of items in the Stack.
 func (s *Stack) Min() int {
-	// MODIFY THE ABOVE Push and Pop FUNCTIONS and the DATA STRUCTURES
-	// WRITE THIS FUNCTION
-	// YOUR Min FUNCTION SHOULD RUN IN TIME *INDEPENDENT* OF THE NUMBER OF ITEMS IN THE STACK
-	return 0
+	minVal := s.minStack.value
+	return minVal
+}
+
+func Compare2Min(x, y int) int {
+	if x > y {
+		return y
+	} else {
+		return x
+	}
 }
 
 /*******************************************************************************************
