@@ -84,7 +84,7 @@ func LowestCommonAncestor(root *TreeNode, x, y int) int {
 /*******************************************************************************************
 Problem 3. Sorted linked list merge. You are given two linked lists, l1 and l2,
 each of which contain values that are sorted by non-decreasing values. Return a
-new linked list that contains all of the nodes of l1 and l2 and that is sorted.
+new linked list that contains all the nodes of l1 and l2 and that is sorted.
 You should not allocate new nodes; reuse the nodes in the input lists.
 
 That is if l1 contains n items and l2 contains m items, the list you return
@@ -98,7 +98,17 @@ type ListNode struct {
 }
 
 func MergeSortedLists(l1, l2 *ListNode) *ListNode {
-	return nil
+	if l1 == nil {
+		return l2
+	} else if l2 == nil {
+		return l1
+	} else if l1.value < l2.value {
+		l1.next = MergeSortedLists(l1.next, l2)
+		return l1
+	} else {
+		l2.next = MergeSortedLists(l1, l2.next)
+		return l2
+	}
 }
 
 /*******************************************************************************************
