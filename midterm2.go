@@ -35,8 +35,6 @@
 
 package main
 
-import "fmt"
-
 /*******************************************************************************************
 Problem 1. Write the function "IsBSTOrdered()": If the values in the binary
 tree rooted at `root` satisfy the binary search tree ordering, return true. If
@@ -283,8 +281,8 @@ func RemoveRowsColumns(matrix [][]int, x int) [][]int {
 		}
 	}
 
-	fmt.Println("rowMap is: ", rowMap)
-	fmt.Println("colMap is: ", colMap)
+	//fmt.Println("rowMap is: ", rowMap)
+	//fmt.Println("colMap is: ", colMap)
 
 	delRowNum := len(rowMap)
 	delColNum := len(colMap)

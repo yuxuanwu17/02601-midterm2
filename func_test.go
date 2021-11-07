@@ -86,21 +86,27 @@ func TestMergeSortedLists(t *testing.T) {
 	l1 := ListNode{
 		value: 1,
 		next: &ListNode{
-			value: 2,
+			value: 3,
 			next: &ListNode{
-				value: 4,
+				value: 6,
 				next:  nil,
 			},
 		},
 	}
 
 	l2 := ListNode{
-		value: 1,
+		value: 2,
 		next: &ListNode{
-			value: 3,
+			value: 2,
 			next: &ListNode{
-				value: 4,
-				next:  nil,
+				value: 2,
+				next: &ListNode{
+					value: 2,
+					next: &ListNode{
+						value: 6,
+						next:  nil,
+					},
+				},
 			},
 		},
 	}
@@ -108,6 +114,7 @@ func TestMergeSortedLists(t *testing.T) {
 	mergedList := MergeSortedLists(&l1, &l2)
 	for {
 		if mergedList.next == nil {
+			fmt.Println(mergedList.value)
 			break
 		}
 		fmt.Println(mergedList.value)
@@ -116,22 +123,63 @@ func TestMergeSortedLists(t *testing.T) {
 
 	fmt.Println("==================")
 
-	l12 := ListNode{}
-	l22 := ListNode{}
-	mergedList2 := MergeSortedLists(&l12, &l22)
-	//fmt.Println(mergedList2)
+	lnode6 := ListNode{
+		next:  nil,
+		value: 6,
+	}
+	lnode3 := ListNode{
+		next:  &lnode6,
+		value: 3,
+	}
+	lnode1 := ListNode{
+		next:  &lnode3,
+		value: 1,
+	}
+	lnode2 := ListNode{
+		next:  &lnode6,
+		value: 2,
+	}
+	lnode2_2 := ListNode{
+		next:  &lnode2,
+		value: 2,
+	}
+	lnode2_2_2 := ListNode{
+		next:  &lnode2_2,
+		value: 2,
+	}
+	lnode2_2_2_2 := ListNode{
+		next:  &lnode2_2_2,
+		value: 2,
+	}
+	//for {
+	//	if lnode1.next == nil {
+	//		fmt.Println(lnode1.value)
+	//		break
+	//	}
+	//	fmt.Println(lnode1.value)
+	//	lnode1 = *lnode1.next
+	//}
+	//
+	//fmt.Println("==================")
+	//for {
+	//	if lnode2_2_2_2.next == nil {
+	//		fmt.Println(lnode2_2_2_2.value)
+	//		break
+	//	}
+	//	fmt.Println(lnode2_2_2_2.value)
+	//	lnode2_2_2_2 = *lnode2_2_2_2.next
+	//}
+
+	mergedList2 := MergeSortedLists(&lnode1, &lnode2_2_2_2)
 	for {
 		if mergedList2.next == nil {
+			fmt.Println(mergedList2.value)
 			break
 		}
 		fmt.Println(mergedList2.value)
 		mergedList2 = mergedList2.next
 	}
-	fmt.Println("==================")
 
-	l13 := ListNode{value: 0, next: nil}
-	mergedList3 := MergeSortedLists(&l12, &l13)
-	fmt.Println(mergedList3.value)
 }
 
 func TestMthFromEnd(t *testing.T) {
@@ -158,6 +206,23 @@ func TestMthFromEnd(t *testing.T) {
 	fmt.Println(MthFromEnd(&ll, 2))
 	fmt.Println(MthFromEnd(&ll, 3))
 	fmt.Println(MthFromEnd(&ll, 4))
+
+	//[1,3,6]
+	fmt.Println("1->3->6")
+	l2 := ListNode{
+		value: 1,
+		next: &ListNode{
+			value: 3,
+			next: &ListNode{
+				value: 6,
+				next:  nil,
+			},
+		},
+	}
+
+	fmt.Println(MthFromEnd(&l2, 1))
+	fmt.Println(MthFromEnd(&l2, 0))
+
 }
 
 func TestStack_Min(t *testing.T) {
